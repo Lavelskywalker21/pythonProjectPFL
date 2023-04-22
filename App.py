@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import streamlit_
+import streamlit_pandas as sp
 
 from PIL import Image
 
@@ -16,7 +16,14 @@ st.image(image,
 df_stats = pd.read_csv('/Users/m.l.brown80886/Downloads/PFL - PFL.csv')
 df_stats
 
+create_data = {
+    "Class": "multiselect",
+    "Country": "multiselect"
+}
 
+all_widgets = sp.create_widgets(df_stats, create_data)
+res = sp.filter_df(df_stats, all_widgets)
+st.write(res)
 
 st.header('Fastest Punch Speed')
 df_stats[['Name','Country', 'Class', 'Max Punch Speed(MPS)' ]]
